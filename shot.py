@@ -18,6 +18,6 @@ class Shot(CircleShape):
     
     def hit(self, asteroid):
         if self.is_colliding(asteroid):
-            asteroid.kill()
+            asteroid.split()
             self.kill()
 

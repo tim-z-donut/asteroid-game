@@ -33,12 +33,12 @@ def main():
         updatable.update(dt)
         for obj in drawable:
             obj.draw(screen)
-        print(f"Asteroid count: {len(asteroids)}")
-        print(f"Lean count: {len(shots)}")
+        # print(f"Asteroid count: {len(asteroids)}")
+        # print(f"Bullet count: {len(shots)}")
         for asteroid in asteroids:
             if player.is_colliding(asteroid):
                 print("Game Over!")
-                # return
+                return
         for shot in shots:
             for asteroid in asteroids:
                 shot.hit(asteroid)
