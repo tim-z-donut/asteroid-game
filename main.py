@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+import hud
 def main():
     print("Starting Asteroids!")
     pygame.init()
@@ -13,12 +14,15 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    huds = pygame.sprite.Group()
     Player.containers = (updatable,drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
+    hud.score.containers = (huds)
     Shot.containers = (updatable,drawable,shots)
     player = Player(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
     asteroidfield = AsteroidField()
+    score = hud.score()
 
     clock = pygame.time.Clock()
     dt = 0
@@ -41,7 +45,10 @@ def main():
                 return
         for shot in shots:
             for asteroid in asteroids:
-                shot.hit(asteroid)
+                shot.hit(asteroid, score)
+        for element in huds:
+            element.draw()
+            screen.blit(score.render, pygame.Vector2(0,0))
         pygame.display.flip()
         
         dt = clock.tick(60)/1000

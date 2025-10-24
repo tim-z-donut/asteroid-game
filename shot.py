@@ -16,8 +16,9 @@ class Shot(CircleShape):
     def draw(self, screen):
         pygame.draw.circle(screen,'purple', self.position,self.radius, 2)
     
-    def hit(self, asteroid):
+    def hit(self, asteroid, score):
         if self.is_colliding(asteroid):
+            score.score+=SCORE_INCREMENT
             asteroid.split()
             self.kill()
 
